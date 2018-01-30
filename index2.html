@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Pokemon</title>
+    <link rel="stylesheet" href="./css/main.css">
+</head>
+<body>
+    
+    <h1>My Pokemon Site</h1>
+    <!-- <div ng-app> -->
+        <!-- The result is {{1+2}}
+        <div>
+            <div>Type your name: <input ng-model="name"></div>
+            <h2>Your name is: {{name}}</h2>
+            <h3 ng-if="name">Here is an h3 tag</h3>
+        </div> -->
+        <!-- </div> -->
+    <div ng-app="pokemonapp">
+        <div ng-controller="cardCtrl">
+
+            <h2>Add a pokemon</h2>
+            <div>
+                <h5>Name: <input ng-model="newCard.name"></h5>
+                <h5>Picture: <input ng-model="newCard.url"></h5>
+                <h5>Type: <input ng-model="newCard.type"></h5>
+                <div>hp: <input ng-model="newCard.stats.hp"><br/></div>
+                <div>atk: <input ng-model="newCard.stats.atk"><br/></div>
+                <div>def: <input ng-model="newCard.stats.def"></div>
+                <div  class="preview">
+                    <div class="card">
+                        <div class="name">{{newCard.name|uppercase}}</div>
+                        <div class="picture" ng-style='{background:"url("+newCard.url+")"}'>
+                        </div>
+                        <div class="stats">
+                            <div ng-repeat="(key, value) in newCard.stats">
+                                {{key|uppercase}}:{{value}}
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                <div><button ng-click="add(newCard)">Add</button></div>
+            </div>
+
+            <h2>filter pokemon by name: <input ng-model="myfilter.name"></h2>
+            <h2>filter pokemon by type: <input ng-model="myfilter.type"></h2>
+            filter date: {{myfilter}}
+
+            <div class="cardList" >
+                <div class="card" ng-repeat="card in cards | filter:myfilter">
+                    <div class="name">{{card.name|uppercase}}</div>
+                    <div class="picture" ng-style='{background:"url("+card.url+")"}'>
+                    </div>
+                    <div class="stats">
+                        <div ng-repeat="(key, value) in card.stats">
+                            {{key|uppercase}}:{{value}}
+                        </div>
+                    </div>
+                    <button ng-click="removeCard($index)">Remove Card</button>
+            </div>
+
+            </div>
+        </div>
+    </div>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/angular.js/1.6.5/angular.js"></script>
+        <script src='./app/app2.js'></script>
+        <script src="./app/controllers/cardCtrl.js"></script>
+</body>
+</html>
